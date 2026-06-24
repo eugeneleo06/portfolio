@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eugene Leo — Integration & Web Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0E1A20;          /* deep petrol base */
+    --ink-2:#13242C;        /* raised surface */
+    --ink-3:#1A2F38;        /* card */
+    --line:#274049;         /* hairline */
+    --signal:#E8A33D;       /* warm signal accent */
+    --node:#5FB3B0;         /* cool connector/node */
+    --paper:#ECE9E1;        /* primary text */
+    --mute:#8FA1A8;         /* secondary text */
+    --mute-2:#5E727A;       /* faint */
+    --max:1080px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--ink);
+    color:var(--paper);
+    font-family:"Inter",system-ui,sans-serif;
+    font-size:17px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 28px;}
+
+  /* utility / labels */
+  .mono{font-family:"IBM Plex Mono",monospace;}
+  .eyebrow{
+    font-family:"IBM Plex Mono",monospace;
+    font-size:12.5px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--node);
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:26px;height:1px;background:var(--node);display:inline-block;
+  }
+
+  h1,h2,h3{font-family:"Space Grotesk",sans-serif;font-weight:600;line-height:1.1;margin:0;}
+
+  /* ===== HERO ===== */
+  header{
+    border-bottom:1px solid var(--line);
+    padding:30px 0;
+  }
+  .topbar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+  .brand{font-family:"Space Grotesk";font-weight:700;letter-spacing:.02em;font-size:18px;}
+  .brand span{color:var(--signal);}
+  .topbar .meta{font-family:"IBM Plex Mono";font-size:13px;color:var(--mute);}
+
+  .hero{padding:84px 0 64px;}
+  .hero .eyebrow{margin-bottom:26px;}
+  .hero h1{
+    font-size:clamp(34px,6vw,62px);
+    letter-spacing:-.01em;
+    max-width:16ch;
+  }
+  .hero h1 em{font-style:normal;color:var(--signal);}
+  .hero p.lede{
+    color:var(--mute);
+    font-size:clamp(17px,2.2vw,20px);
+    max-width:56ch;
+    margin:28px 0 0;
+  }
+
+  /* ===== signature: signal path ===== */
+  .signal-path{
+    margin:54px 0 8px;
+    border:1px solid var(--line);
+    border-radius:14px;
+    background:linear-gradient(180deg,var(--ink-2),var(--ink));
+    padding:30px 26px;
+    overflow:hidden;
+  }
+  .sp-track{
+    display:flex;align-items:center;justify-content:space-between;
+    position:relative;gap:8px;
+  }
+  .sp-line{
+    position:absolute;left:6%;right:6%;top:50%;height:2px;
+    background:var(--line);transform:translateY(-50%);
+  }
+  .sp-pulse{
+    position:absolute;left:6%;top:50%;width:54px;height:2px;
+    transform:translateY(-50%);
+    background:linear-gradient(90deg,transparent,var(--signal),transparent);
+    animation:flow 3.4s linear infinite;
+  }
+  @keyframes flow{0%{left:4%;opacity:0;}10%{opacity:1;}90%{opacity:1;}100%{left:88%;opacity:0;}}
+  .sp-node{
+    position:relative;z-index:2;text-align:center;
+    background:var(--ink);padding:0 4px;
+  }
+  .sp-dot{
+    width:13px;height:13px;border-radius:50%;
+    border:2px solid var(--node);background:var(--ink);
+    margin:0 auto 12px;
+  }
+  .sp-node:nth-child(3) .sp-dot{border-color:var(--signal);background:var(--signal);box-shadow:0 0 0 5px rgba(232,163,61,.14);}
+  .sp-node .k{font-family:"IBM Plex Mono";font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--mute-2);}
+  .sp-node .v{font-family:"Space Grotesk";font-weight:500;font-size:14px;margin-top:3px;color:var(--paper);}
+  .sp-caption{font-family:"IBM Plex Mono";font-size:12.5px;color:var(--mute);margin-top:24px;text-align:center;}
+  .sp-caption b{color:var(--node);font-weight:500;}
+
+  /* ===== sections ===== */
+  section{padding:74px 0;border-bottom:1px solid var(--line);}
+  .sec-head{margin-bottom:40px;}
+  .sec-head h2{font-size:clamp(26px,4vw,38px);margin-top:18px;letter-spacing:-.01em;}
+  .sec-head p{color:var(--mute);max-width:60ch;margin:14px 0 0;}
+
+  /* project / item cards */
+  .grid{display:grid;gap:18px;}
+  .card{
+    background:var(--ink-3);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:26px;
+    transition:border-color .25s ease, transform .25s ease;
+  }
+  .card:hover{border-color:var(--node);transform:translateY(-2px);}
+  .card h3{font-size:21px;}
+  .card .tags{margin:14px 0 16px;display:flex;flex-wrap:wrap;gap:7px;}
+  .tag{
+    font-family:"IBM Plex Mono";font-size:11.5px;letter-spacing:.04em;
+    color:var(--node);border:1px solid var(--line);
+    padding:4px 9px;border-radius:6px;
+  }
+  .card .role{font-family:"IBM Plex Mono";font-size:12px;color:var(--mute-2);text-transform:uppercase;letter-spacing:.1em;}
+  .card p{margin:10px 0 0;color:var(--mute);font-size:15.5px;}
+  .card .solved{margin-top:14px;color:var(--paper);font-size:15.5px;}
+  .card .solved b{color:var(--signal);font-weight:600;}
+  .ph{color:var(--signal);font-family:"IBM Plex Mono";font-size:13px;}
+
+  /* case study */
+  .case{display:grid;gap:0;border:1px solid var(--line);border-radius:14px;overflow:hidden;}
+  .case .row{padding:24px 26px;border-bottom:1px solid var(--line);}
+  .case .row:last-child{border-bottom:0;background:var(--ink-2);}
+  .case .k{font-family:"IBM Plex Mono";font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--node);margin-bottom:9px;}
+  .case .row p{margin:0;color:var(--paper);font-size:16px;}
+  .case .row.result p{color:var(--paper);}
+  .case .row.result b{color:var(--signal);}
+
+  /* skills */
+  .skills{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  .skills .col{background:var(--ink-3);border:1px solid var(--line);border-radius:14px;padding:26px;}
+  .skills .col.strong{border-left:3px solid var(--signal);}
+  .skills .col.dev{border-left:3px solid var(--node);}
+  .skills h3{font-size:15px;font-family:"IBM Plex Mono";font-weight:500;letter-spacing:.08em;text-transform:uppercase;margin-bottom:18px;color:var(--mute);}
+  .skills ul{margin:0;padding:0;list-style:none;}
+  .skills li{padding:7px 0;border-bottom:1px solid rgba(39,64,73,.5);font-size:15.5px;}
+  .skills li:last-child{border-bottom:0;}
+  .skills .note{font-family:"IBM Plex Mono";font-size:12px;color:var(--mute-2);margin-top:16px;line-height:1.5;}
+
+  /* contact */
+  .contact{padding:78px 0 96px;border-bottom:0;}
+  .contact h2{font-size:clamp(26px,4vw,40px);}
+  .contact p{color:var(--mute);margin:16px 0 30px;max-width:52ch;}
+  .links{display:flex;flex-wrap:wrap;gap:12px;}
+  .btn{
+    display:inline-flex;align-items:center;gap:9px;
+    font-family:"IBM Plex Mono";font-size:14px;
+    padding:13px 18px;border-radius:9px;text-decoration:none;
+    border:1px solid var(--line);color:var(--paper);
+    transition:border-color .2s,background .2s,color .2s;
+  }
+  .btn:hover{border-color:var(--node);}
+  .btn.primary{background:var(--signal);color:#1a1206;border-color:var(--signal);font-weight:500;}
+  .btn.primary:hover{background:#f0b659;}
+
+  footer{padding:30px 0;color:var(--mute-2);font-family:"IBM Plex Mono";font-size:12.5px;text-align:center;}
+
+  /* focus + motion */
+  a:focus-visible,.btn:focus-visible{outline:2px solid var(--signal);outline-offset:3px;}
+  @media (prefers-reduced-motion:reduce){
+    .sp-pulse{animation:none;opacity:.6;left:46%;}
+    html{scroll-behavior:auto;}
+    .card{transition:none;}
+  }
+
+  @media(max-width:760px){
+    body{font-size:16px;}
+    .hero{padding:60px 0 44px;}
+    .signal-path{padding:24px 16px;}
+    .sp-node .v{font-size:12px;}
+    .sp-node .k{font-size:10px;}
+    section{padding:54px 0;}
+    .skills{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap topbar">
+    <div class="brand">Eugene<span>.</span>Leo</div>
+    <div class="meta">Integration &amp; Web Engineer · Jakarta (GMT+7)</div>
+  </div>
+</header>
+
+<!-- ===== HERO / THESIS ===== -->
+<div class="wrap">
+  <section class="hero" style="border-bottom:0;padding-bottom:40px;">
+    <span class="eyebrow">The connective layer</span>
+    <h1>I work in the layer where <em>platforms meet code</em>.</h1>
+    <p class="lede">
+      Backend engineer with 3+ years building production systems in Go — REST APIs,
+      webhooks, OAuth flows, third-party integrations, and the automation that keeps
+      data moving between services. The place where no-code tools usually hit a wall
+      is where I'm most useful.
+    </p>
+
+    <!-- signature: signal path -->
+    <div class="signal-path" aria-label="How a request travels through an integration">
+      <div class="sp-track">
+        <div class="sp-line"></div>
+        <div class="sp-pulse"></div>
+        <div class="sp-node">
+          <div class="sp-dot"></div>
+          <div class="k">Platform</div>
+          <div class="v">Webflow · WP · Zapier</div>
+        </div>
+        <div class="sp-node">
+          <div class="sp-dot"></div>
+          <div class="k">Trigger</div>
+          <div class="v">Webhook / event</div>
+        </div>
+        <div class="sp-node">
+          <div class="sp-dot"></div>
+          <div class="k">Logic</div>
+          <div class="v">Custom code</div>
+        </div>
+        <div class="sp-node">
+          <div class="sp-dot"></div>
+          <div class="k">System</div>
+          <div class="v">CRM · payments · tracking</div>
+        </div>
+      </div>
+      <div class="sp-caption">
+        Most people can wire the first and last node. I understand <b>everything that happens in between</b>.
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ===== BLOCK 1: WEBSITES ===== -->
+<div class="wrap">
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">01 — Web work</span>
+      <h2>Sites &amp; web apps I've shipped</h2>
+      <p>The web projects I worked on in production — what I owned, and the technical problems I actually solved on them. Replace the placeholders below with your real projects, screenshots, and links.</p>
+    </div>
+
+    <div class="grid">
+      <!-- DUPLICATE THIS CARD PER PROJECT -->
+      <article class="card">
+        <div class="role">Project · highest-relevance first</div>
+        <h3 style="margin-top:8px;">[Project name] <span class="ph">— add link / screenshot</span></h3>
+        <div class="tags">
+          <span class="tag">[Stack, e.g. Go]</span>
+          <span class="tag">[Framework]</span>
+          <span class="tag">[Payments?]</span>
+          <span class="tag">[Integrations]</span>
+        </div>
+        <p><b style="color:var(--paper)">What it was:</b> [1 line — what the site does, who for, rough scale or traffic if you know it.]</p>
+        <p class="solved"><b>What I solved:</b> [The real technical problem — a broken checkout, a fragile integration, slow queries. Not "I built a website."]</p>
+      </article>
+
+      <article class="card">
+        <div class="role">Project</div>
+        <h3 style="margin-top:8px;">[Project name] <span class="ph">— add link / screenshot</span></h3>
+        <div class="tags">
+          <span class="tag">[Stack]</span>
+          <span class="tag">[Framework]</span>
+          <span class="tag">[Integrations]</span>
+        </div>
+        <p><b style="color:var(--paper)">What it was:</b> [1 line.]</p>
+        <p class="solved"><b>What I solved:</b> [The problem you fixed.]</p>
+      </article>
+    </div>
+  </section>
+</div>
+
+<!-- ===== BLOCK 2: INTEGRATIONS (the weapon) ===== -->
+<div class="wrap">
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">02 — Integrations &amp; automation</span>
+      <h2>Connecting other people's systems</h2>
+      <p>This is the core of the job at Atlas — and it's the work I've done most. The same logic Zapier runs on (triggers, conditions, error handling) I've built by hand, end to end.</p>
+    </div>
+
+    <div class="grid" style="grid-template-columns:repeat(2,1fr);">
+      <article class="card">
+        <h3>Attribution &amp; tracking</h3>
+        <div class="tags"><span class="tag">AppsFlyer</span><span class="tag">event pipelines</span></div>
+        <p>Integrated AppsFlyer for attribution and event tracking across services — the same problem space as pixels, GA4 events, and server-side tracking.</p>
+      </article>
+
+      <article class="card">
+        <h3>Secure auth flows</h3>
+        <div class="tags"><span class="tag">OAuth2</span><span class="tag">Kong Gateway</span></div>
+        <p>Built and hardened OAuth2 flows behind a Kong API gateway — I connect services securely, not just by clicking "authorize".</p>
+      </article>
+
+      <article class="card">
+        <h3>Webhooks &amp; event-driven flows</h3>
+        <div class="tags"><span class="tag">webhooks</span><span class="tag">message queues</span><span class="tag">cron</span></div>
+        <p>Designed event-driven processing with queues (RabbitMQ/NSQ), background workers, and scheduled jobs. This is Zapier's model, built from first principles.</p>
+      </article>
+
+      <article class="card">
+        <h3>Third-party services</h3>
+        <div class="tags"><span class="tag">Privy</span><span class="tag">VFirst</span><span class="tag">REST APIs</span></div>
+        <p>Integrated identity, messaging, and verification providers into a production lending platform — used to reading docs and making someone else's API behave.</p>
+      </article>
+    </div>
+  </section>
+</div>
+
+<!-- ===== BLOCK 3: CASE STUDY ===== -->
+<div class="wrap">
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">03 — A problem I solved</span>
+      <h2>When something broke in production</h2>
+      <p>Atlas needs someone reliable when payments go down or a funnel breaks. Replace the placeholders with one real incident — pick the one you're proudest of.</p>
+    </div>
+
+    <div class="case">
+      <div class="row"><div class="k">Situation</div><p>[What was happening — the system, the symptom, who it affected.]</p></div>
+      <div class="row"><div class="k">Why it was hard</div><p>[What made it non-obvious — intermittent, cross-system, under load, etc.]</p></div>
+      <div class="row"><div class="k">What I did</div><p>[Your approach — how you diagnosed it, the fix, and the judgement call between a quick patch and the right solution.]</p></div>
+      <div class="row result"><div class="k">Result</div><p><b>[The outcome with a number if you have one — response time down X, uptime restored, DB load cut Y%.]</b></p></div>
+    </div>
+  </section>
+</div>
+
+<!-- ===== BLOCK 4: SKILLS (honest) ===== -->
+<div class="wrap">
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">04 — Where I stand</span>
+      <h2>Honest skill map</h2>
+      <p>I'd rather tell you exactly where I'm strong and where I'm still building than oversell a fit. The strong column is most of what this role runs on under the hood.</p>
+    </div>
+
+    <div class="skills">
+      <div class="col strong">
+        <h3>Strong</h3>
+        <ul>
+          <li>Custom HTML / CSS / JavaScript</li>
+          <li>REST APIs &amp; webhooks</li>
+          <li>OAuth2 &amp; secure integrations</li>
+          <li>Full-stack debugging</li>
+          <li>Third-party API integration</li>
+          <li>Tracking &amp; event pipelines (AppsFlyer)</li>
+          <li>Git, CI/CD, Docker</li>
+          <li>Performance &amp; caching (Redis, query tuning)</li>
+        </ul>
+      </div>
+      <div class="col dev">
+        <h3>Building toward</h3>
+        <ul>
+          <li>Webflow (CMS, interactions)</li>
+          <li>WordPress &amp; WooCommerce</li>
+          <li>Zapier (multi-step, conditional)</li>
+          <li>GTM &amp; GA4 setup</li>
+          <li>Core Web Vitals tooling</li>
+        </ul>
+        <p class="note">// These sit on top of fundamentals I already have — webhooks, APIs, custom code. The platforms are the fast part to learn.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ===== CONTACT ===== -->
+<div class="wrap">
+  <section class="contact">
+    <span class="eyebrow">Get in touch</span>
+    <h2 style="margin-top:18px;">Let's talk about the work.</h2>
+    <p>If you need someone who can own the connective tissue of a web stack — and grow into the platforms fast — I'd like to hear about it.</p>
+    <div class="links">
+      <a class="btn primary" href="mailto:eugeneleo14@gmail.com">Email me</a>
+      <a class="btn" href="https://www.linkedin.com/in/eugeneleo/" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn" href="https://github.com/eugeneleo06" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="wrap">© 2026 Eugene Leo · built and hosted by me</div>
+</footer>
+
+</body>
+</html>
