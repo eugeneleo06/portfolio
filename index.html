@@ -254,6 +254,9 @@
         display: grid;
         gap: 18px;
       }
+      .grid-2col {
+        grid-template-columns: repeat(2, 1fr);
+      }
       .card {
         background: var(--ink-3);
         border: 1px solid var(--line);
@@ -475,16 +478,24 @@
         body {
           font-size: 16px;
         }
+        .wrap {
+          padding: 0 16px;
+        }
+        .topbar {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 4px;
+        }
         .hero {
           padding: 60px 0 44px;
         }
         .signal-path {
-          padding: 24px 16px;
+          padding: 20px 14px;
         }
         .sp-track {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          gap: 18px;
+          gap: 14px;
           justify-items: center;
         }
         .sp-line,
@@ -507,6 +518,15 @@
         }
         .sp-dot {
           margin-bottom: 8px;
+        }
+        .sp-caption {
+          font-size: 11.5px;
+        }
+        .card {
+          padding: 18px;
+        }
+        .grid-2col {
+          grid-template-columns: 1fr;
         }
         section {
           padding: 54px 0;
@@ -759,7 +779,7 @@
           <h2>Connecting other people's systems</h2>
         </div>
 
-        <div class="grid" style="grid-template-columns: repeat(2, 1fr)">
+        <div class="grid grid-2col">
           <article class="card">
             <h3>Attribution &amp; tracking</h3>
             <div class="tags">
