@@ -481,11 +481,32 @@
         .signal-path {
           padding: 24px 16px;
         }
+        .sp-track {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 18px;
+          justify-items: center;
+        }
+        .sp-line,
+        .sp-pulse {
+          display: none;
+        }
+        .sp-node {
+          padding: 0;
+          width: 100%;
+          background: var(--ink-2);
+          border: 1px solid var(--line);
+          border-radius: 10px;
+          padding: 14px 10px;
+        }
         .sp-node .v {
-          font-size: 12px;
+          font-size: 13px;
         }
         .sp-node .k {
           font-size: 10px;
+        }
+        .sp-dot {
+          margin-bottom: 8px;
         }
         section {
           padding: 54px 0;
